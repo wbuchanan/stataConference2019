@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Stata Conference 2019</title>
+
+		<meta name="description" content="Intro to Item Response Theory using Open Source Solutions">
+		<meta name="author" content="William R. Buchanan">
+		<meta name="institution" content="Fayette County Public Schools">
+		<meta name="title" content="Director of Grants, Research, Accountability, & Data">
+		<meta name="location" content="701 East Main Street, Lexington, KY 40502">
+		<meta name="contact" content="Billy.Buchanan@fayette.kyschools.us">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/solarized.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+		<!-- Used to get the vis.js library for the timeline
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" type="text/css">
+		-->
+
+		<script src="js/vis.js"></script>
+		<link rel="stylesheet" href="css/vis.css" type="text/css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<script>
+			imgselect = function() {
+				var imgsel = d3.select("select#imgselector").property("value");
+				d3.select("img#image").attr("src", imgsel);
+			};
+		</script>
+
+		<style>
+			.reveal .vis-text.vis-minor, .reveal .vis-text.vis-major {
+				font-size : 1em !important;
+			}
+			.vis-item.vis-background {
+				font-size : 1.5em !important;
+			}
+			.vis-item .vis-item-overflow {
+				overflow : visible;
+			}
+			div.vis-item-content {
+				font-size: 0.65em !important;
+			}
+			.vis-item.vis-box.vis-readonly {
+				background-color : #f79646;
+				z-index: 5 !important;
+			}
+
+			.vis-item.vis-dot.vis-readonly, .vis-item.vis-line.vis-readonly {
+				color : #f79646 !important;
+				z-index: 3 !important;
+			}
+			.vis-item.vis-background {
+				background-color : rgba(0, 0, 255, 1);
+			}
+
+			h1, h2, h3, h4, h5, a, ul, ol, li, p {
+				color: black !important;
+			}
+			div.reveal.slide.center, div.slides {
+				width : 90vw !important;
+				height: 90vh !important;
+			}
+			#timeline1, #timeline2, #timeline3, #timeline4 {
+				margin-left : 7.5% !important;
+				margin-right : 10% !important;
+				margin-bottom : 10% !important;
+				margin-top : 0% !important;
+			}
+		</style>
+
+</head>
+<body>
+
+	<div class="reveal" style="display : flex !important; justify-content: center !important; height : 95vh !important; width : 90vw !important;">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+
+
+			<section>
+				<h2>Barrel-aged software development:</h2>
+				<h3>brewscheme as a four-year-old</h3>
+				<p>
+					<small><a href="https://github.com/wbuchanan" tabindex="-1">Billy Buchanan, Ph.D.</a> </br>
+						<a href="http://www.fcps.net/administration/departments/data" tabindex="-1">Director, Office of Grants, Research, Accountability, &amp; Data</a></br>
+						<a href="https://scorecard.fcps.net/" tabindex="-1">Fayette County Public Schools</a></br>
+					</small>
+				</p>
+				<div style="font-size:48px; font-weight:bold"><a href="https://wbuchanan.github.io/stataConference2019" tabindex="-1">https://wbuchanan.github.io/stataConference2019</a></div>
+				<aside class="notes">
+
+					<p>The term "software development" implies some type of change over time. While Stata goes
+						through extraordinary steps to support backward compatibility, user-contributors may not
+						always see a need to continue developing programs shared with the community.</p>
+
+					<p>How do you know if or when you should add additional programs or functionality to an existing
+						package? Is it easy and practical to extend existing Stata code, or is it easier to refactor
+						everything from the ground up? What can you do to make it easier to extend existing code?
+						While brewscheme may have started as a relatively simple package with a couple of commands
+						and limited functionality, in the four years since it was introduced, it has grown into a
+						multifunctional library of tools to make it easier to create customized visualizations in
+						Stata while being mindful of color sight impairments. I will share my experience, what I
+						have learned, and strategies related to how I dealt with these questions in the context of
+						the development of the brewscheme package. I will also show what the additional features do
+						that the original brewscheme did not do.</p>
+
+				</aside>
+			</section>
+
+			<!-- This should get commented out prior to the conference -->
+			<section>
+				<div>
+					<ul>
+						<li>brewscheme beginning</li>
+						<li>Adding Functionality</li>
+						<li>Adding Features</li>
+						<li>Knowing when to refactor</li>
+					</ul>
+				</div>
+			</section>
+			<!-- -->
+
+			<!-- Example of nested vertical slides -->
+			<section>
+				<h2>A brief history of <code>brewscheme</code></h2>
+			</section>
+			<section>
+				<section>
+					<div style="width: 95vw !important; height: 90vh !important; display : flex; justify-content: center !important;">
+						<div id="timeline1" style="width: 95vw !important; height: 90vh !important;">
+							<!--
+							<ul>
+								<li>brewscheme initially includes <code>brewscheme</code> and <code>brewmeta</code></li>
+								<li></li>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+							-->
+						</div>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<div style="width: 95vw !important; height: 90vh !important; display : flex; justify-content: center !important;">
+						<div id="timeline2" style="width: 95vw !important; height: 90vh !important; ">
+							<!--
+							<ul>
+								<li>brewscheme initially includes <code>brewscheme</code> and <code>brewmeta</code></li>
+								<li></li>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+							-->
+						</div>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<div style="width: 115vw !important; height: 95vh !important; display : flex; justify-content: center !important;">
+						<div id="timeline3" style="width: 90vw !important; height: 90vh !important; margin-bottom : 50% !important; margin-right : 20% !important">
+							<!--
+							<ul>
+								<li>brewscheme initially includes <code>brewscheme</code> and <code>brewmeta</code></li>
+								<li></li>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+							-->
+						</div>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<div style="width: 95vw !important; height: 90vh !important; display : flex; justify-content: center !important;">
+						<div id="timeline4" style="width: 95vw !important; height: 90vh !important; margin-left: -30%; margin-bottom: 75px;">
+							<!--
+							<ul>
+								<li>brewscheme initially includes <code>brewscheme</code> and <code>brewmeta</code></li>
+								<li></li>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+							-->
+						</div>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<div style="width: 135vw !important; height: 95vh !important; display : flex; justify-content: center !important;">
+						<div id="timeline5" style="width: 115vw !important; height: 95vh !important; margin-left: -30%; margin-bottom: 75px;">
+							<!--
+							<ul>
+								<li>brewscheme initially includes <code>brewscheme</code> and <code>brewmeta</code></li>
+								<li></li>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+							-->
+						</div>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Temp</h3>
+					<div>
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+
+			<!-- End of First Vertical Chunk/Section -->
+			</section>
+
+		</div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+	<script>
+
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			controls: true,
+			progress: false,
+			history: true,
+			center: true,
+			overview: true,
+			touch: true,
+			transition: 'slide', // none/fade/slide/convex/concave/zoom
+			transitionSpeed: 'slow',
+			backgroundTransition: 'fade',
+			margin : 0.275,
+			math: {
+				mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+				config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+			},
+
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [
+				{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+				{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				{ src: 'plugin/zoom-js/zoom.js', async: true },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/math/math.js', async: true }
+			]
+		});
+
+	</script>
+	<!--
+		<script src="js/brewschemeTimeline.js"></script>
+	-->
+	</body>
+	<script src="js/brewschemeTimeline.js"></script>
+
+</html>
+
