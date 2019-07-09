@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
-
-	<head>
+<head>
 		<meta charset="utf-8">
 
 		<title>Stata Conference 2019</title>
@@ -47,31 +46,23 @@
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
 
-		<script>
-			imgselect = function() {
-				var imgsel = d3.select("select#imgselector").property("value");
-				d3.select("img#image").attr("src", imgsel);
-			};
-		</script>
-
 		<style>
-			.reveal .vis-text.vis-minor, .reveal .vis-text.vis-major {
-				font-size : 1em !important;
-			}
 			.vis-item.vis-background {
 				font-size : 1.5em !important;
+			}
+			.vis-text.vis-minor, .vis-text.vis-major {
+				font-size : 0.65em !important;
 			}
 			.vis-item .vis-item-overflow {
 				overflow : visible;
 			}
 			div.vis-item-content {
-				font-size: 0.65em !important;
+				font-size: 0.5em !important;
 			}
 			.vis-item.vis-box.vis-readonly {
 				background-color : #f79646;
 				z-index: 5 !important;
 			}
-
 			.vis-item.vis-dot.vis-readonly, .vis-item.vis-line.vis-readonly {
 				color : #f79646 !important;
 				z-index: 3 !important;
@@ -79,26 +70,41 @@
 			.vis-item.vis-background {
 				background-color : rgba(0, 0, 255, 1);
 			}
+			.timeline {
+				width : 90vw !important;
+				height : 75vh !important;
+				min-width : 50vw !important;
+				min-height : 50vh !important;
+				z-index : 20 !important;
+				margin-left : auto !important;
+				margin-right : auto !important;
+				margin-top : auto !important;
+				margin-bottom : auto !important;
+			}
 
+			.reveal > .slides {
+				width : 100vw !important;
+				height : 100vh !important;
+				left : unset !important;
+				right : unset !important;
+				top : unset !important;
+				bottom : unset !important;
+				transform : none !important;
+			}
+			#timeline3 {
+				height : 105vh !important;
+				margin-top : auto !important;
+				margin-bottom : auto !important;
+			}
 			h1, h2, h3, h4, h5, a, ul, ol, li, p {
 				color: black !important;
-			}
-			div.reveal.slide.center, div.slides {
-				width : 90vw !important;
-				height: 90vh !important;
-			}
-			#timeline1, #timeline2, #timeline3, #timeline4 {
-				margin-left : 7.5% !important;
-				margin-right : 10% !important;
-				margin-bottom : 10% !important;
-				margin-top : 0% !important;
 			}
 		</style>
 
 </head>
 <body>
 
-	<div class="reveal" style="display : flex !important; justify-content: center !important; height : 95vh !important; width : 90vw !important;">
+	<div class="reveal">
 
 		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
@@ -134,38 +140,59 @@
 				</aside>
 			</section>
 
-			<!-- This should get commented out prior to the conference -->
-			<section>
-				<div>
-					<ul>
-						<li>brewscheme beginning</li>
-						<li>Adding Functionality</li>
-						<li>Adding Features</li>
-						<li>Knowing when to refactor</li>
-					</ul>
-				</div>
-			</section>
-			<!-- -->
-
 			<!-- Example of nested vertical slides -->
 			<section>
-				<h2>A brief history of <code>brewscheme</code></h2>
+				<h2><code>brewscheme</code> a historical perspective</h2>
 			</section>
 			<section>
 				<section>
-					<div style="width: 95vw !important; height: 90vh !important; display : flex; justify-content: center !important;">
-						<div id="timeline1" style="width: 95vw !important; height: 90vh !important;">
-							<!--
+					<div id="timeline1" class="timeline"></div>
+					<aside class="notes">
+						<!--
+						Describe why I started working on this, what the capabilities were, and how it executed
+						-->
+						<ul>
+							<li>Initial Motivation</li>
 							<ul>
-								<li>brewscheme initially includes <code>brewscheme</code> and <code>brewmeta</code></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
+								<li>It takes too much effort to code aesthetics for every graph (e.g., MDE Scatterplots)</li>
+								<li>Schemes make it very efficient to reproduce aesthetics</li>
+								<li>Not much attention has been paid to scheme files</li>
+								<li>A fair number of Stata users do not like s2color</li>
 							</ul>
-							-->
-						</div>
-					</div>
+							<li>Capabilities</li>
+							<ul>
+								<li>Only used colorbrewer palettes</li>
+								<li>No way to adjust other aesthetic properties of the graphs, just the colors</li>
+								<li>No recycling of colors, symbols, etc...</li>
+							</ul>
+							<li>Execution</li>
+							<ul>
+								<li>All maximum color values were hardcoded in brewscheme.ado</li>
+								<li>Stored all of the colors in dataset characteristics and hardcoded all of them.</li>
+							</ul>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<div id="timeline2" class="timeline"></div>
+					<aside class="notes">
+						<!--
+How do you know if or when you should add additional programs or functionality to an existing package?
+Is it easy and practical to extend existing Stata code, or is it easier to refactor everything from the ground up?
+What can you do to make it easier to extend existing code?
+
+						-->
+						<ul>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<div id="timeline3" class="timeline"></div>
 					<aside class="notes">
 						<ul>
 							<li></li>
@@ -176,19 +203,7 @@
 				</section>
 
 				<section>
-					<div style="width: 95vw !important; height: 90vh !important; display : flex; justify-content: center !important;">
-						<div id="timeline2" style="width: 95vw !important; height: 90vh !important; ">
-							<!--
-							<ul>
-								<li>brewscheme initially includes <code>brewscheme</code> and <code>brewmeta</code></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-							</ul>
-							-->
-						</div>
-					</div>
+					<div id="timeline4" class="timeline"></div>
 					<aside class="notes">
 						<ul>
 							<li></li>
@@ -199,65 +214,7 @@
 				</section>
 
 				<section>
-					<div style="width: 115vw !important; height: 95vh !important; display : flex; justify-content: center !important;">
-						<div id="timeline3" style="width: 90vw !important; height: 90vh !important; margin-bottom : 50% !important; margin-right : 20% !important">
-							<!--
-							<ul>
-								<li>brewscheme initially includes <code>brewscheme</code> and <code>brewmeta</code></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-							</ul>
-							-->
-						</div>
-					</div>
-					<aside class="notes">
-						<ul>
-							<li></li>
-							<li></li>
-							<li></li>
-						</ul>
-					</aside>
-				</section>
-
-				<section>
-					<div style="width: 95vw !important; height: 90vh !important; display : flex; justify-content: center !important;">
-						<div id="timeline4" style="width: 95vw !important; height: 90vh !important; margin-left: -30%; margin-bottom: 75px;">
-							<!--
-							<ul>
-								<li>brewscheme initially includes <code>brewscheme</code> and <code>brewmeta</code></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-							</ul>
-							-->
-						</div>
-					</div>
-					<aside class="notes">
-						<ul>
-							<li></li>
-							<li></li>
-							<li></li>
-						</ul>
-					</aside>
-				</section>
-
-				<section>
-					<div style="width: 135vw !important; height: 95vh !important; display : flex; justify-content: center !important;">
-						<div id="timeline5" style="width: 115vw !important; height: 95vh !important; margin-left: -30%; margin-bottom: 75px;">
-							<!--
-							<ul>
-								<li>brewscheme initially includes <code>brewscheme</code> and <code>brewmeta</code></li>
-								<li></li>
-								<li></li>
-								<li></li>
-								<li></li>
-							</ul>
-							-->
-						</div>
-					</div>
+					<div id="timeline5" class="timeline"></div>
 					<aside class="notes">
 						<ul>
 							<li></li>
@@ -267,18 +224,79 @@
 					</aside>
 				</section>
 			</section>
+
+			<section>
+				<h2>Lessons learned...<br>and others I still have yet to learn</h2>
+			</section>
+
 			<section>
 				<section>
-					<h3>Temp</h3>
-					<div>
+					<h3>Take time to review version control commits over the history of a project.</h3>
+					<aside class="notes">
+						<ul>
+							<li>Aside from documenting reasons for changes, this can also be informative to show/learn why you made specific changes at some point in the future when you've forgotten things.</li>
+							<li>Things I forgot I did</li>
+							<li>Selecting only a subset to include in the slide deck</li>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>Insert note related to Bill Gould's advice here.</h3>
+					<aside class="notes">
 						<ul>
 							<li></li>
 							<li></li>
 							<li></li>
+						</ul>
+					</aside>
+				</section>
+
+
+				<section>
+					<h3>Bundle programs that are directly related to the same task.</h3>
+					<aside class="notes">
+						<ul>
+							<li>Can discuss issues with dirfile and having to fix code a bunch of times</li>
+							<li>Can also discuss how this affected some of the Java programs that used StataJavaUtilities</li>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Only hardcode values that need to be hardcoded.</h3>
+					<aside class="notes">
+						<ul>
+							<li></li>
 							<li></li>
 							<li></li>
 						</ul>
-					</div>
+					</aside>
+				</section>
+				<section>
+					<h3>Whenever possible and practical use Mata.</h3>
+					<aside class="notes">
+						<ul>
+							<li>Because Stata operates on data sets, it doesn't work quite a well to generate functions that return values that can be used by other programs.</li>
+							<li>Mata also has the advantage of a form of object oriented programming which can make it easier to extend existing programs more easily.</li>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h3>Write shorter programs</h3>
+					<aside class="notes">
+						<ul>
+							<li>Talk about issues trying to figure out where things go wrong and debugging</li>
+							<li></li>
+							<li></li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3></h3>
 					<aside class="notes">
 						<ul>
 							<li></li>
@@ -309,20 +327,17 @@
 			transition: 'slide', // none/fade/slide/convex/concave/zoom
 			transitionSpeed: 'slow',
 			backgroundTransition: 'fade',
-			margin : 0.275,
-			math: {
-				mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
-				config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
-			},
+			margin : 0.4,
+			maxScale : 20.0,
 
 			// More info https://github.com/hakimel/reveal.js#dependencies
 			dependencies: [
 				{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-				{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-				{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-				{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-				{ src: 'plugin/zoom-js/zoom.js', async: true },
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
 				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true },
+				{ src: 'plugin/zoom-js/zoom.js', async: true },
 				{ src: 'plugin/math/math.js', async: true }
 			]
 		});
