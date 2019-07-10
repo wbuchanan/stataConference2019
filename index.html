@@ -141,9 +141,16 @@
 			</section>
 
 			<!-- Example of nested vertical slides -->
-			<section>
+			<section data-autoslide="60000">
 				<h2><code>brewscheme</code> a historical perspective</h2>
+				<aside class="notes">
+					<ul>
+						<li>One thing not mentioned in the abstract is maintenance.</li>
+						<li>Mention how decisions about maintaining code factor into things as well.</li>
+					</ul>
+				</aside>
 			</section>
+
 			<section>
 				<section>
 					<div id="timeline1" class="timeline"></div>
@@ -152,24 +159,16 @@
 						Describe why I started working on this, what the capabilities were, and how it executed
 						-->
 						<ul>
-							<li>Initial Motivation</li>
-							<ul>
-								<li>It takes too much effort to code aesthetics for every graph (e.g., MDE Scatterplots)</li>
-								<li>Schemes make it very efficient to reproduce aesthetics</li>
-								<li>Not much attention has been paid to scheme files</li>
-								<li>A fair number of Stata users do not like s2color</li>
-							</ul>
-							<li>Capabilities</li>
-							<ul>
-								<li>Only used colorbrewer palettes</li>
-								<li>No way to adjust other aesthetic properties of the graphs, just the colors</li>
-								<li>No recycling of colors, symbols, etc...</li>
-							</ul>
-							<li>Execution</li>
-							<ul>
-								<li>All maximum color values were hardcoded in brewscheme.ado</li>
-								<li>Stored all of the colors in dataset characteristics and hardcoded all of them.</li>
-							</ul>
+							<li>'The code you write is called a system when there is more than one
+								related function that users will call.' (Gould, 2018; pp. 287)</li>
+							<li>Right out of the gates, brewscheme was off to a suboptimal start.</li>
+							<li>Instead of decoupling of concerns I tried to jam it all in there.</li>
+							<li>This was also compounded by hardcoding so much of the data used to construct the schemes.</li>
+							<li>Decoupling the concerns (e.g., reading vs writing) meant I needed either a public (new ado) or private (subroutine) function to handle the reading/importing.</li>
+							<li>brewcolors handled adding new named color styles to Stata.</li>
+							<li>brewextra was added to extend the palettes available from brewscheme.</li>
+							<li>brewdb was eventually create to handle building the database for the color palettes.</li>
+							<li>The Mata recycle function was inspired by the way R handles arrays (or vectors in their parlance) of different lengths.</li>
 						</ul>
 					</aside>
 				</section>
@@ -178,15 +177,22 @@
 					<div id="timeline2" class="timeline"></div>
 					<aside class="notes">
 						<!--
-How do you know if or when you should add additional programs or functionality to an existing package?
-Is it easy and practical to extend existing Stata code, or is it easier to refactor everything from the ground up?
-What can you do to make it easier to extend existing code?
-
+						How do you know if or when you should add additional programs or functionality to an existing package?
+						Is it easy and practical to extend existing Stata code, or is it easier to refactor everything from the ground up?
+						What can you do to make it easier to extend existing code?
 						-->
 						<ul>
-							<li></li>
-							<li></li>
-							<li></li>
+							<li>dirfile gets used to construct/rebuild directories along the ADOPATH to store the data used by brewscheme/brewtheme.</li>
+							<li>brewterpolate provides a mechanism to identify colors with a specified number of points interpolated between a starting/ending color.</li>
+							<li>hextorgb was added to make it easier to work with hexdecimal colors.</li>
+							<li>brewviewer a previewer for color palettes</li>
+							<li>brewscheme was already verbose enough without adding all the other scheme elements to the program.</li>
+							<li>It was also clear that brewscheme had addressed one specific part of the problem space.</li>
+							<li>brewterpolate gets developed to start addressing the other part of the problem space.</li>
+							<li>This is also a great example of where Bill Gould's Mata book being published a few years earlier would have made my life much easier.</li>
+							<li>A day after the first draft of brewterpolate is committed I rewrite just about the entire thing with a completely different architecture.</li>
+							<li>Had I started writing all of this in Mata initially, it would have been much easier to extend things to handle the brewtheme case.</li>
+							<li>Writing things in Mata would have also made it easier to add additional color palettes.</li>
 						</ul>
 					</aside>
 				</section>
@@ -195,9 +201,25 @@ What can you do to make it easier to extend existing code?
 					<div id="timeline3" class="timeline"></div>
 					<aside class="notes">
 						<ul>
-							<li></li>
-							<li></li>
-							<li></li>
+							<li>Initially brewscheme only generated a single scheme file.</li>
+							<li>Due to some of the changes, additions, and updates made in this section, it became possible to make brewscheme generate schemes to simulate the user specified palette under different forms of color sight impairments.</li>
+							<li>The major contributor to this started as colorblind.mata which was subsequently refactored to become libbrewscheme.</li>
+							<li>Although some community contributors choose not to release Mata source, I took a different approach.</li>
+							<li>filesys uses Java to identify file system properties (e.g., file modified dates).  This is used by brewlibcheck to detect whether or not the Mata library needs to be updated for the user automatically.</li>
+							<li>Unlike some of the other programs referenced here, brewtheme's help, filesys, and brewterpolate are all maintained in separate repositories and bundled with the system/toolkit together.</li>
+							<li>The help file for brewtheme may actually be one of the more important community contributions for documentation purposes (assuming nothing much has changed with the Scheme files).</li>
+							<li>Finding help entries related to scheme file properties is not easy by any stretch of the imagination.</li>
+							<li>In constructing the helpfile for brewtheme I quite literally searched for help file entries for every single property that can be set by brewtheme.  When no help documentation could be located, I added references to which line in the s2color scheme the property could be found.</li>
+							<li>However, I view brewproof as the most important contribution from an applied perspective.</li>
+							<li>While it is great to be able to generate scheme files that simulate color sight impairments, it is better to be able to proof your visualizations before publication to ensure that the visualizations are accessible to all.</li>
+							<li>The most challenging issue to deal with when debugging the schemes was definitely the handling for contour plots.  I remember this taking much longer than the 2-3 days between the GitHub issue and commit resolving it.</li>
+							<li>One of the challenges with developing a toolkit/system of commands is the API design itself.  In this case, there were different options that all essentially meant the same thing (e.g., replace and rebuild).  This is when it finally hit me and I fixed it.</li>
+							<li>brewcbsim this is a simple program that allows users to see how a set of colors might be perceived by individuals with different forms of color sight deficiencies.</li>
+							<li>brewtransform gets used internally when updated the database of palettes and named color styles to store color sight impaired versions of the colors.</li>
+							<li>brewsearch finds RGB values of named color styles.</li>
+							<li>brewcolordb builds a local database of named color styles and uses brewtransform which is a wrapper around libbrewscheme functions to generate additional styles with color sight impaired simulated values.</li>
+							<li>Yes it really took that long to translate the s2color palette</li>
+							<li>While there was already a solution in place to recycle colors to the maximum number of colors used in the scheme, it took quite a bit longer for me to do the same with marker symbols.</li>
 						</ul>
 					</aside>
 				</section>
@@ -206,9 +228,11 @@ What can you do to make it easier to extend existing code?
 					<div id="timeline4" class="timeline"></div>
 					<aside class="notes">
 						<ul>
-							<li></li>
-							<li></li>
-							<li></li>
+							<li>Version 1.0.0 marked a milestone for the package.</li>
+							<li>At this point the article was submitted to SJ and every bug I could identify was generally resolved by that point.</li>
+							<li>That said, during the process of adding the other functionality I ended up learning about other issues in the same problem space that should be solved.</li>
+							<li>One thing that came up from StataList users was providing a way to share schemes directly instead of having to generate schemes (basically a quicker/faster try it before you buy it kind of a thing).</li>
+							<li>The brewscheme extras repository was intended to serve that purpose, but is only as useful all contributors can make it.</li>
 						</ul>
 					</aside>
 				</section>
@@ -217,94 +241,81 @@ What can you do to make it easier to extend existing code?
 					<div id="timeline5" class="timeline"></div>
 					<aside class="notes">
 						<ul>
-							<li></li>
-							<li></li>
-							<li></li>
+							<li>Now some of those other related issues start to be dealt with.</li>
+							<li>brewcontrastratio provides a way for users to test the color contrast ratios between background color and text color.</li>
+							<li>When there is insufficient font size/type face and color contrast ratio it can be extraordinarily difficult for end users to read the text.</li>
+							<li>If anyone needs to see an example of this, they can look at some of the web pages I've built in the past.</li>
+							<li>Do you remember the thing about palettes from University of Oregon a few slides ago?  brewmorepalettes helps to avoid some of the challenges with including .do files in packages (e.g., required vs optional scripts).</li>
+							<li>dialog boxes are hard....very hard....but the suggestion from Michael Mitchell was valueable and useful nonetheless.</li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 
-			<section>
+			<section data-autoslide="10000">
 				<h2>Lessons learned...<br>and others I still have yet to learn</h2>
 			</section>
 
 			<section>
+
 				<section>
-					<h3>Take time to review version control commits over the history of a project.</h3>
+					<h3>Dialog box programming is not easy.</h3>
+					<aside class="notes">
+						<ul>
+							<li>The Java and Python APIs might help with this moving forward.</li>
+							<li>Fixed window sizes make it extremely challenging to create dialog boxes for commands like brewscheme that have many arguments.</li>
+							<li>This can, however, provide quite a bit of value to end users and is still a worthy endeavor.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Invest more in the design of systems/toolkits initially.</h3>
+					<aside class="notes">
+						<ul>
+							<li>If doing this all again from scratch it would likely look quite a bit different now.</li>
+							<li>I would develop a Mata function to generate a palette and insert it into either an AssociativeArray or Mata matrix.</li>
+							<li>All the functions that are used to write the schemes/themes would be written in Mata using the Mata objects.</li>
+							<li>Aside from normal performance gains from compiled languages, this would also be more efficient since I could use a singleton pattern to avoid many I/O operations.</li>
+							<li>This can also help to identify the scope of smaller programs that can all be connected/related or what Bill Gould would call 'Self-Threading code'.</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h3>Use version control and make time to review commits over time.</h3>
 					<aside class="notes">
 						<ul>
 							<li>Aside from documenting reasons for changes, this can also be informative to show/learn why you made specific changes at some point in the future when you've forgotten things.</li>
 							<li>Things I forgot I did</li>
 							<li>Selecting only a subset to include in the slide deck</li>
-							<li></li>
-						</ul>
-					</aside>
-				</section>
-				<section>
-					<h3>Insert note related to Bill Gould's advice here.</h3>
-					<aside class="notes">
-						<ul>
-							<li></li>
-							<li></li>
-							<li></li>
-						</ul>
-					</aside>
-				</section>
-
-
-				<section>
-					<h3>Bundle programs that are directly related to the same task.</h3>
-					<aside class="notes">
-						<ul>
-							<li>Can discuss issues with dirfile and having to fix code a bunch of times</li>
-							<li>Can also discuss how this affected some of the Java programs that used StataJavaUtilities</li>
-							<li></li>
+							<li>Creating the slides for this talk has been highly informative for me and really interesting to see the evolution from that detailed perspective.</li>
 						</ul>
 					</aside>
 				</section>
 
 				<section>
-					<h3>Only hardcode values that need to be hardcoded.</h3>
+					<h3>Be aware of dependency management issues and challenges.</h3>
 					<aside class="notes">
 						<ul>
-							<li></li>
-							<li></li>
-							<li></li>
+							<li>StataJavaUtilities was included in a few different packages, but as one would be updated it created problems for users that already had a previous version on their system.</li>
+							<li>The same thing happened with dirfile when it was used in other packages and/or would be updated independently.</li>
 						</ul>
 					</aside>
 				</section>
+
 				<section>
 					<h3>Whenever possible and practical use Mata.</h3>
 					<aside class="notes">
 						<ul>
 							<li>Because Stata operates on data sets, it doesn't work quite a well to generate functions that return values that can be used by other programs.</li>
 							<li>Mata also has the advantage of a form of object oriented programming which can make it easier to extend existing programs more easily.</li>
-							<li></li>
-						</ul>
-					</aside>
-				</section>
-				<section>
-					<h3>Write shorter programs</h3>
-					<aside class="notes">
-						<ul>
-							<li>Talk about issues trying to figure out where things go wrong and debugging</li>
-							<li></li>
-							<li></li>
+							<li>Some times Mata is not the best tool for the job, but if it can be it should be used.</li>
+							<li>Since starting to use Mata a bit more, I've found that it can regularly help to make your life easier when it comes to extending existing code while maintaining the existing codebase.</li>
 						</ul>
 					</aside>
 				</section>
 
-				<section>
-					<h3></h3>
-					<aside class="notes">
-						<ul>
-							<li></li>
-							<li></li>
-							<li></li>
-						</ul>
-					</aside>
-				</section>
 
 			<!-- End of First Vertical Chunk/Section -->
 			</section>
@@ -319,11 +330,23 @@ What can you do to make it easier to extend existing code?
 		// More info https://github.com/hakimel/reveal.js#configuration
 		Reveal.initialize({
 			controls: true,
+			controlsTutorial: false,
+			controlsLayout: 'edges',
+			controlsBackArrows: 'faded',
+			keyboard: true,
+			loop: false,
+			help: true,
+			showNotes: false,
 			progress: false,
 			history: true,
 			center: true,
 			overview: true,
 			touch: true,
+			autoSlideStoppable: true,
+			defaultTiming: 120,
+			hideCursorTime: 2500,
+			display: 'block',
+			viewDistance: 7,
 			transition: 'slide', // none/fade/slide/convex/concave/zoom
 			transitionSpeed: 'slow',
 			backgroundTransition: 'fade',
