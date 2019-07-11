@@ -70,33 +70,47 @@ var timeline2 = new vis.DataSet([
     /*
         Added an additional return code to check what was happening here.
      */
-    { id : 10, content : 'squashing file<br>path bugs', start : '2015-10-13 16:39:03', title : 'Apparently, there are multiple return codes used when a file<br>is not confirmed as new.  This added the 603 return<br>code to patch a bizarre OS bug.' },
+    { id : 10, content : 'squashing file<br>path bugs', start : '2015-10-13 16:39:03',
+        title : 'Apparently, there are multiple return codes used when a file<br>is not confirmed as new.  This added the 603 return<br>code to patch a bizarre OS bug.',
+        easterEgg : null  },
     /*
         This was used to decouple responsibilities for testing/checking for the appropriate file path
      */
-    { id : 11, content : 'dirfile added', start : '2015-10-14 12:14:48', title : 'I have a love hate relationship with this program.<br>It does the job, but definitely needs an update.' },
+    { id : 11, content : 'dirfile added', start : '2015-10-14 12:14:48',
+        title : 'I have a love hate relationship with this program.<br>It does the job, but definitely needs an update.',
+        easterEgg : null  },
     /*
         Java plugin developed to handle generating interpolations in color space between a start and end point.
         Options from the ado file are all part of the underlying Java API.
      */
-    { id : 12, content : 'brewterpolate added', start : '2015-10-26 11:30:59', title : 'Want to generate your own color ramps/palettes?<br>How would you do that?  brewterpolate was<br>created to make it fairly simple to generate<br>sequential color palettes.' },
+    { id : 12, content : 'brewterpolate added', start : '2015-10-26 11:30:59',
+        title : 'Want to generate your own color ramps/palettes?<br>How would you do that?  brewterpolate was<br>created to make it fairly simple to generate<br>sequential color palettes.',
+        easterEgg : null },
     /*
         Added the different categorical color scales to the program at this point
      */
-    { id : 13, content : 'D3.js palettes added', start : '2015-11-06 11:16:27', title : 'D3.js is popular and recognizable, so I added<br>some of their color palettes to brewscheme.' },
+    { id : 13, content : 'D3.js palettes added', start : '2015-11-06 11:16:27',
+        title : 'D3.js is popular and recognizable, so I added<br>some of their color palettes to brewscheme.',
+        easterEgg : null  },
     /*
         Here is a case where the program is maintained in a separate repository, but bundled with brewscheme for the
         purposes of distribution
      */
-    { id : 14, content : 'hextorgb added', start : '2015-11-06 11:16:27', title : 'Most descriptive program name ever.  States exactly what the program does and nothing else.' },
+    { id : 14, content : 'hextorgb added', start : '2015-11-06 11:16:27',
+        title : 'Most descriptive program name ever.  States exactly what the program does and nothing else.',
+        easterEgg : null  },
     /*
         Provides a palette previewer along the lines of a program named colorscheme developed by Matthieu Gomez
      */
-    { id : 15, content : 'brewviewer added', start : '2015-11-07 10:36:32', title : 'Provides a way to view palettes in different ways and can<br>include color sight impaired translations of the colors.' },
+    { id : 15, content : 'brewviewer added', start : '2015-11-07 10:36:32',
+        title : 'Provides a way to view palettes in different ways and can<br>include color sight impaired translations of the colors.',
+        easterEgg : null  },
     /*
         To me, this is one of the more important updates to the package.
      */
-    { id : 16, content : 'brewtheme added', start : '2015-11-15 08:11:10', title : 'Finally, I started working on how to deal with other<br>aesthetics in visualizations beyond the marks themselves.' },
+    { id : 16, content : 'brewtheme added', start : '2015-11-15 08:11:10',
+        title : 'Finally, I started working on how to deal with other<br>aesthetics in visualizations beyond the marks themselves.',
+        easterEgg : null  },
     /*
         Rewrote the start of brewtheme.  Now is closer to parallel in construction to the rest of
         brewscheme with a look up table used to verify arguments and write out the file. Includes
@@ -105,20 +119,28 @@ var timeline2 = new vis.DataSet([
         default values and write the dataset out to a theme file. Will need to modify brewscheme
         to read values from specified lines of the theme file.
      */
-    { id : 17, content : 'brewtheme data added', start : '2015-11-16 06:57:12', title : 'It almost made it 24 hours without<br>being completely rewritten.' },
+    { id : 17, content : 'brewtheme data added', start : '2015-11-16 06:57:12',
+        title : 'It almost made it 24 hours without<br>being completely rewritten.',
+        easterEgg : null  },
     /*
         Tested functionality using brewtheme.  With no theme argument the updated brewscheme
         replicates the same results that the previous version did.
      */
-    { id : 18, content : 'brewtheme joins brewscheme', start : '2015-11-17 05:53:46', title : 'It may have been a bit early at this point to proclaim it<br>being alive, but it was definitely alive...and integrated.' },
+    { id : 18, content : 'brewtheme joins brewscheme', start : '2015-11-17 05:53:46',
+        title : 'It may have been a bit early at this point to proclaim it<br>being alive, but it was definitely alive...and integrated.',
+        easterEgg : null  },
     /*
 
      */
-    { id : 19, content : 'ggplot2 palette added', start : '2015-11-18 04:49:10', title : 'I did this purely to put an end to the<br>flame how much better ggplot2 graphs look compared to Stata graphs.' },
+    { id : 19, content : 'ggplot2 palette added', start : '2015-11-18 04:49:10',
+        title : 'I did this purely to put an end to the<br>flame how much better ggplot2 graphs look compared to Stata graphs.',
+        easterEgg : 'http://wbuchanan.github.io/brewscheme/help/brewtheme/'  },
     /*
         Built a database of named color styles from default Stata installation. Would subsequently
      */
-    { id : 20, content : 'brewcolordb added', start : '2015-11-21 10:19:47', title : 'The initial version of this just creates a database of named colors from Stata.' },
+    { id : 20, content : 'brewcolordb added', start : '2015-11-21 10:19:47',
+        title : 'The initial version of this just creates a database of named colors from Stata.',
+        easterEgg : null  },
     /*
 
     { id : 21, content : 'brewcolors added', start : '2015-11-21 10:19:47', title : 'This ' },
@@ -126,7 +148,9 @@ var timeline2 = new vis.DataSet([
     /*
     This may have been when the U Oregon color palettes got added as a standalone script
      */
-    { id : 22, content : 'Palettes from<br>Uniiversity of Oregon<br>added', start : '2015-11-23 06:20:57', title : 'This was a standalone do file to parse<br>and load additional palettes; it was<br>eventually refactored into brewextra.' }
+    { id : 22, content : 'Palettes from<br>Uniiversity of Oregon<br>added', start : '2015-11-23 06:20:57',
+        title : 'This was a standalone do file to parse<br>and load additional palettes; it was<br>eventually refactored into brewextra.',
+        easterEgg : null  }
 ]);
 var timeline3 = new vis.DataSet([
     { id : 'Beta', content : '<strong style="color: white !important;">Beta Brewscheme</strong>', start : '2015-11-24', end : '2016-03-20', type : 'background'},
@@ -306,7 +330,7 @@ var timeline3 = new vis.DataSet([
      */
     { id : 49, content : 'brewtheme help completed', start : '2016-03-12 03:24:35',
         title : 'There are still a few entries that are not documented<br>(<em>to the best of my knowledge at least</em>),<br>but everything that is documented got links and<br>those elements that were not documented got line references<br>to their location in s2color.',
-        easterEgg : null  },
+        easterEgg : 'http://wbuchanan.github.io/brewscheme/help/brewtheme/'  },
     /*
     This was generic refactoring to standardize the apis across the toolkit
      */
