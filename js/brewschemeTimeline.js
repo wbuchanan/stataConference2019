@@ -364,7 +364,7 @@ var timeline4 = new vis.DataSet([
         easterEgg : null  }
 ]);
 var timeline5 = new vis.DataSet([
-    { id : 'Future', content : '<strong style="color: white !important;">Future Brewscheme</strong>', start : '2016-11-01', end : '2018-08-10', type : 'background'},
+    { id : 'Future', content : '<strong style="color: white !important;">Future Brewscheme</strong>', start : '2016-11-01', end : '2019-07-11', type : 'background'},
     /*
         This program was only added on the development branch, but is used to test the WCAG standards for color
         contrast ratios for web-based text.  It includes both the AA and AAA levels defined by the W3C.
@@ -400,6 +400,11 @@ var timeline5 = new vis.DataSet([
      */
     { id : 59, content : 'Dialog box update', start : '2018-08-10 15:58:38', title : 'This is the first attempt at updating the dialog box work.<br>One major challenge is needing to define a fixed window size,<br>particularly when the number of options can vary based on arguments.',
         easterEgg : null  },
+    /*
+     */
+    { id : 60, content : 'Updating brewscheme &amp;<br>brewtheme for Stata 16<br>changes', start : '2019-07-11 09:30:00',
+        title : 'The only easter egg here is that I just saw that scheme files now<br>include more attributes related to forrest plots that require<br>an update to the program.',
+        easterEgg : null  }
 ]);
 
 /*
@@ -475,14 +480,14 @@ var options1 = {
     },
     options5 = {
         start : '2016-07-01',
-        end : '2018-12-04',
+        end : '2019-09-11',
         editable : false,
         zoomMin: 1000 * 60 * 60,
-        zoomMax: 1000 * 60 * 60 * 24 * 7 * 300,
+        zoomMax: 1000 * 60 * 60 * 24 * 365.25 * 4,
         height: '90%',
         width: '90%',
-        min : new Date(2016, 7, 30),
-        max : new Date(2018, 9, 20),
+        min : new Date(2016, 6, 30),
+        max : new Date(2019, 11, 11),
         type : 'box',
         dataAttributes : [ 'id', 'content' ],
         tooltip : {
